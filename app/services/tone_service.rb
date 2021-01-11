@@ -1,7 +1,8 @@
 class ToneService
   def self.tones(author_poem)
     response = conn(author_poem).get('/v3/tone')
-    JSON.parse(response.body, symbolize_names: true)
+    json = JSON.parse(response.body, symbolize_names: true)
+    json[:document_tone][:tones]
   end
 
   def self.conn(author_poem)

@@ -1,14 +1,11 @@
 class SearchFacade
-  def self.authors(author)
+  def self.authors(author, limit)
     json = AuthorService.authors(author)
-    @authors = json.map do |author_data|
-      Author.new(author_data)
-    end
-  end
-
-  def self.tones(author)
-    authors(author).map do |a|
-      ToneService.tones(a.poem)
+    json.first(limit).map do |author_data|
+      authors = Author.new(author_data)
+      tones = ToneService.tones(authors.poem).map { |tone_data| Tone.new(tone_data)}
+      authors.set_tones(tones)
+      authors
     end
   end
 end

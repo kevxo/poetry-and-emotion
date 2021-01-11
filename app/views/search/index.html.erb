@@ -1,9 +1,14 @@
 <h1>Author: <%= params[:author] %></h1>
 
 <% @authors.shift(10).each do |author| %>
-  <ul class="author">
-    <li class="title"><%= author.title %></li>
-    <li class="name"><%= author.name %></li>
-    <li class="poem"><%= author.poem %></li>
-  </ul>
+  <section class="poems">
+    <ul class="info">
+      <li class="title"><%= author.title %></li>
+      <li class="name"><%= author.name %></li>
+      <li class="text"><%= author.poem %></li>
+      <% author.tones.each do |tone| %>
+        <li class="tone"><%= tone.tone %></li>
+      <% end %>
+    </ul>
+  </section>
 <% end %>

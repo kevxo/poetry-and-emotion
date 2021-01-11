@@ -11,11 +11,13 @@ describe 'As a user' do
       end
 
       expect(current_path).to eq('/search')
+      expect(page).to have_css('.poems', count: 10)
 
-      within(first('.author')) do
+      within(first('.info')) do
         expect(page).to have_css('.title')
         expect(page).to have_css('.name')
-        expect(page).to have_css('.poem')
+        expect(page).to have_css('.text')
+        expect(page).to have_css('.tone')
       end
     end
   end
